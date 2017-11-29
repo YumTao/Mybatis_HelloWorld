@@ -1,4 +1,4 @@
-# Mybatis Hello World程序
+# Mybatis Hello World
 
 ## 工程环境:
 
