@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 引入外部资源配置文件 -->
+	<properties resource="jdbc.properties" />
+
+	<settings>
+		<!-- 开启驼峰自动映射,如pojo: userName 对应数据库 column: user_name -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	<!-- 对pojo类,取别名,不区分大小写  如com.yumtao.mybatis.student -> student -->
+	<typeAliases>
+		<package name="com.yumtao.mybatis.pojo" />
+	</typeAliases>
+
+	<!-- 配置环境，制定数据库连接信息 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 动态代理dao:扫描指定包,注意xml与dao的名称要一致 -->
+	<mappers>
+		<package name="com.yumtao.mybatis.mapper" />
+	</mappers>
+</configuration>
+

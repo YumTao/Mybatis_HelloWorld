@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 1.命名空间:与dao接口全类名一致  -->
+<mapper namespace="com.yumtao.mybatis.mapper.StudentMapper">
+
+	<!-- 新增,返回主键id,id封装到插入的对象中 -->
+	<!-- 
+		2.id要与接口对应的方法名一致
+		3.parameterType类型要与接口对应方法的输入参数类型一致
+		4.resultType类型要与接口对应方法的返回值类型一致 
+	-->
+	<insert id="addStudent" useGeneratedKeys="true"  
+		keyProperty="id">
+		INSERT INTO student 
+		(id, 
+		name, 
+		age, 
+		gender
+		)
+		VALUES
+		(#{id}, 
+		#{name}, 
+		#{age}, 
+		#{gender}
+		);
+	</insert>
+	
+	<!-- 根据id查询student -->
+	<select id="queryStudentById" resultType="student" parameterType="int">
+		SELECT 	
+		id, 
+		NAME, 
+		age, 
+		gender
+		 
+		FROM 
+		student 
+		
+		WHERE 
+		id = #{id}
+	</select>
+	
+	<!-- 根据id更新 -->
+	<update id="updateStudentById" parameterType="student">
+		UPDATE student 
+		SET
+		id = #{id} , 
+		NAME = #{name} , 
+		age = #{age} , 
+		gender = #{gender}
+		
+		WHERE
+		id = #{id} ;
+	</update>
+	
+	<!-- 根据id删除 -->
+	<delete id="deleteStudentById" parameterType="int">
+		DELETE FROM student 
+			WHERE
+			id = #{id} ;
+	</delete>
+
+</mapper>
